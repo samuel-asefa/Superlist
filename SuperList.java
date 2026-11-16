@@ -28,6 +28,22 @@ public class SuperList<E> {
         return true;
     }
 
+    @Override
+    public String toString() {
+        String result = "[";
+        Node<E> current = head;
+
+        while (current != null) {
+            result += current.value;
+            if (current.hasNext()) {
+                result += ", ";
+            }
+            current = current.next;
+        }
+
+        return result + "]";
+    }
+
     private static class Node<E> {
         private E value;
         private Node<E> next;
