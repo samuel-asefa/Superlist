@@ -9,5 +9,13 @@ public class SuperList<E> {
             next = null;
             prev = null;
         }
+
+        public boolean hasNext() {
+            return next != null;
+        }
+
+        public boolean hasPrev() {
+            return prev != null;
+        }
     }
 }
