@@ -13,6 +13,21 @@ public class SuperList<E> {
         return size;
     }
 
+    public boolean add(E value) {
+        Node<E> node = new Node<>(value);
+
+        if (head == null) {
+            head = node;
+        } else {
+            tail.next = node;
+            node.prev = tail;
+        }
+
+        tail = node;
+        size++;
+        return true;
+    }
+
     private static class Node<E> {
         private E value;
         private Node<E> next;
