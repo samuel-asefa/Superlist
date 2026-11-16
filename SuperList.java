@@ -9,6 +9,10 @@ public class SuperList<E> {
         size = 0;
     }
 
+    public int size() {
+        return size;
+    }
+
     private static class Node<E> {
         private E value;
         private Node<E> next;
