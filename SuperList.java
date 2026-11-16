@@ -1,4 +1,14 @@
 public class SuperList<E> {
+    private Node<E> head;
+    private Node<E> tail;
+    private int size;
+
+    public SuperList() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
     private static class Node<E> {
         private E value;
         private Node<E> next;
