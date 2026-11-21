@@ -81,6 +81,38 @@ public class SuperList<E> {
         }
     }
 
+    public void add(int index, E value) {
+        checkAddIndex(index);
+
+        if (index == size) {
+            add(value);
+            return;
+        }
+
+        Node<E> current = getNode(index);
+        Node<E> node = new Node<>(value);
+
+        if (index == 0) {
+            node.next = head;
+            head.prev = node;
+            head = node;
+        } else {
+            node.next = current;
+            node.prev = current.prev;
+
+            current.prev.next = node;
+            current.prev = node;
+        }
+
+        size++;
+    }
+
+    private void checkAddIndex(int index) {
+        if (index < 0 || index > size) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+    }
+
     private static class Node<E> {
         private E value;
         private Node<E> next;
