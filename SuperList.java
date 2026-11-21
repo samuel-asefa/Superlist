@@ -1,3 +1,5 @@
+import java.util.EmptyStackException;
+
 public class SuperList<E> {
     private Node<E> head;
     private Node<E> tail;
@@ -14,35 +16,34 @@ public class SuperList<E> {
     }
 
     public boolean add(E value) {
-        Node<E> node = new Node<> 
+        Node<E> node = new Node<>(value);
 
         if (head == null) {
             head = node;
-        } else { 
+        } else {
             tail.next = node;
-            node.prev = tail; 
-        } 
+            node.prev = tail;
+        }
 
-        tail = node; 
+        tail = node;
         size++;
-        return true; 
+        return true;
     }
 
-    @Override 
-    public String toString() { 
+    @Override
+    public String toString() {
         String result = "[";
         Node<E> current = head;
 
         while (current != null) {
             result += current.value;
-            if (current.hasNext() 
+            if (current.hasNext()) {
                 result += ", ";
             }
-            current = current.nex 
+            current = current.next;
         }
 
-    return result+"]";
-
+        return result + "]";
     }
 
     public E get(int index) {
@@ -163,6 +164,25 @@ public class SuperList<E> {
         }
 
         return false;
+    }
+
+    public E push(E value) {
+        add(value);
+        return value;
+    }
+
+    public E pop() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return remove(size - 1);
+    }
+
+    public E stackPeek() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return tail.value;
     }
 
     private static class Node<E> {
