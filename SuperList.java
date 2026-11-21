@@ -113,6 +113,30 @@ public class SuperList<E> {
         }
     }
 
+    public E remove(int index) {
+        checkIndex(index);
+
+        Node<E> current = getNode(index);
+        E removedValue = current.value;
+
+        if (current.prev == null) {
+            head = current.next;
+        } else {
+            current.prev.next = current.next;
+        }
+
+        if (current.next == null) {
+            tail = current.prev;
+        } else {
+            current.next.prev = current.prev;
+        }
+
+        current.next = null;
+        current.prev = null;
+        size--;
+        return removedValue;
+    }
+
     private static class Node<E> {
         private E value;
         private Node<E> next;
