@@ -44,6 +44,43 @@ public class SuperList<E> {
         return result + "]";
     }
 
+    public E get(int index) {
+        checkIndex(index);
+        return getNode(index).value;
+    }
+
+    public E set(int index, E val) {
+        checkIndex(index);
+        Node<E> current = getNode(index);
+        E oldValue = current.value;
+        current.value = val;
+        return oldValue;
+    }
+
+    private Node<E> getNode(int index) {
+        Node<E> current;
+
+        if (index <= size / 2) {
+            current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+        } else {
+            current = tail;
+            for (int i = size - 1; i > index; i--) {
+                current = current.prev;
+            }
+        }
+
+        return current;
+    }
+
+    private void checkIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+    }
+
     private static class Node<E> {
         private E value;
         private Node<E> next;
