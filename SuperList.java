@@ -185,6 +185,20 @@ public class SuperList<E> {
         return tail.value;
     }
 
+    public E poll() {
+        if (isEmpty()) {
+            return null;
+        }
+        return remove(0);
+    }
+
+    public E queuePeek() {
+        if (isEmpty()) {
+            return null;
+        }
+        return head.value;
+    }
+
     private static class Node<E> {
         private E value;
         private Node<E> next;
