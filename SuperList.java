@@ -31,18 +31,19 @@ public class SuperList<E> implements SL<E> {
 
     @Override
     public String toString() {
-        String result = "[";
+        StringBuffer result = new StringBuffer("[");
         Node<E> current = head;
 
         while (current != null) {
-            result += current.value;
+            result.append(current.value);
             if (current.hasNext()) {
-                result += ", ";
+                result.append(", ");
             }
             current = current.next;
         }
 
-        return result + "]";
+        result.append(']');
+        return result.toString();
     }
 
     public E get(int index) {
