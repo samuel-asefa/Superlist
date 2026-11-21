@@ -1,6 +1,6 @@
 import java.util.EmptyStackException;
 
-public class SuperList<E> {
+public class SuperList<E> implements SL<E> {
     private Node<E> head;
     private Node<E> tail;
     private int size;
@@ -15,7 +15,7 @@ public class SuperList<E> {
         return size;
     }
 
-    public boolean add(E value) {
+    public void add(E value) {
         Node<E> node = new Node<>(value);
 
         if (head == null) {
@@ -27,7 +27,6 @@ public class SuperList<E> {
 
         tail = node;
         size++;
-        return true;
     }
 
     @Override
@@ -197,6 +196,54 @@ public class SuperList<E> {
             return null;
         }
         return head.value;
+    }
+
+    @Override
+    public String getAuthor() {
+        return "Samuel Asefa";
+    }
+
+    @Override
+    public void insertList(int index, SL<E> other) {
+        checkAddIndex(index);
+        if (other == this) {
+            throw new IllegalArgumentException();
+        }
+
+        int count = other.size();
+        if (count == 0) {
+            return;
+        }
+
+        Node<E> first = new Node<>(other.get(0));
+        Node<E> last = first;
+        for (int i = 1; i < count; i++) {
+            Node<E> node = new Node<>(other.get(i));
+            last.next = node;
+            node.prev = last;
+            last = node;
+        }
+
+        Node<E> next = null;
+        Node<E> prev = tail;
+        if (index < size) {
+            next = getNode(index);
+            prev = next.prev;
+        }
+
+        first.prev = prev;
+        last.next = next;
+        if (prev == null) {
+            head = first;
+        } else {
+            prev.next = first;
+        }
+        if (next == null) {
+            tail = last;
+        } else {
+            next.prev = last;
+        }
+        size += count;
     }
 
     private static class Node<E> {
