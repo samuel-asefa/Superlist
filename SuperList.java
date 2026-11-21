@@ -14,34 +14,35 @@ public class SuperList<E> {
     }
 
     public boolean add(E value) {
-        Node<E> node = new Node<>(value);
+        Node<E> node = new Node<> 
 
         if (head == null) {
             head = node;
-        } else {
+        } else { 
             tail.next = node;
-            node.prev = tail;
-        }
+            node.prev = tail; 
+        } 
 
-        tail = node;
+        tail = node; 
         size++;
-        return true;
+        return true; 
     }
 
-    @Override
-    public String toString() {
+    @Override 
+    public String toString() { 
         String result = "[";
         Node<E> current = head;
 
         while (current != null) {
             result += current.value;
-            if (current.hasNext()) {
+            if (current.hasNext() 
                 result += ", ";
             }
-            current = current.next;
+            current = current.nex 
         }
 
-        return result + "]";
+    return result+"]";
+
     }
 
     public E get(int index) {
