@@ -137,6 +137,33 @@ public class SuperList<E> {
         return removedValue;
     }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public void clear() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
+    public boolean contains(E value) {
+        Node<E> current = head;
+
+        while (current != null) {
+            if (value == null) {
+                if (current.value == null) {
+                    return true;
+                }
+            } else if (value.equals(current.value)) {
+                return true;
+            }
+            current = current.next;
+        }
+
+        return false;
+    }
+
     private static class Node<E> {
         private E value;
         private Node<E> next;
